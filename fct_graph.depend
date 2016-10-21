@@ -7,3 +7,17 @@
 
 1476969439 c:\users\01\documents\projet_colaboratif\projet_1_bataile_navalle\fonction_graph.h
 
+1476969439 source:c:\users\01\documents\projet_colaboratif\bataile_navalle\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"fonction_graph.h"
+
+1476969439 c:\users\01\documents\projet_colaboratif\bataile_navalle\fonction_graph.h
+
+1477040396 source:c:\users\01\documents\projet_colaboratif\bataile_navalle\fonction_graph.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"fonction_graph.h"
+
