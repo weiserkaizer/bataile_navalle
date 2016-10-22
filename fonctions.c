@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 //#include "donnees.h"
 #include "fonction_graph.h"
 
@@ -172,6 +173,57 @@ EtatCase ** initialisationJoueur()
 	return grilleJoueur;
 }
 
+
+int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, int colonne, EtatCase ** plateau)
+{
+	int ajoutLigne, ajoutColonne;
+	//
+	if ( strcmp(orientationNavire, "V+") == 0 )
+	{
+		ajoutLigne = -1;
+		ajoutColonne = 0;
+	}
+	else if ( strcmp(orientationNavire, "V-") == 0 )
+	{
+		ajoutLigne = 1;
+		ajoutColonne = 0;
+	}
+	else if ( strcmp(orientationNavire, "H+") == 0 )
+	{
+		ajoutLigne = 0;
+		ajoutColonne = 1;
+	}
+	else if ( strcmp(orientationNavire, "H-") == 0 )
+	{
+		ajoutLigne = 0;
+		ajoutColonne = -1;
+	}
+	//
+	int testLigne = ligne + (ajoutLigne * (tailleNavire -1));
+	int testColonne = colonne + (ajoutColonne * (tailleNavire -1));
+
+	if( (strcmp((plateau[ligne][colonne]).cel, "CelVide") == 0) && (testLigne >= 0) && (testLigne <= (TAILLEPLATEAU - 1))
+			&& (testColonne >= 0) && (testColonne <= (TAILLEPLATEAU - 1)) )
+	{
+		int i;
+
+		for(i = 1; i < tailleNavire; i++)
+		{
+			ligne += ajoutLigne;
+			colonne += ajoutColonne;
+
+			if( strcmp((plateau[ligne][colonne]).cel, "CelVide") != 0 )
+			{
+				return 0;
+			}
+		}
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
 
 
 

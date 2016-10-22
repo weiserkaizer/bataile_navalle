@@ -15,7 +15,7 @@
 int saisieCoord(int *ligne, int *colonne); // demande saisie des coordonnees et renvoie un booleen sur la véracité de la saisie
 int saisieOrient(char orientation[2]);
 EtatCase ** initialisationJoueur();
-int verifieCoordonnee(int ligne, int colonne);
+int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, int colonne, EtatCase ** plateau);
 
 
 #endif /* FONCTIONS_H_ */
