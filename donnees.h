@@ -8,7 +8,10 @@
 #ifndef DONNEES_H_
 #define DONNEES_H_
 
+
 #define TAILLEPLATEAU 10			//Dimension du plateau de jeu (un carré)
+
+//TO : Torpilleur, SM: Sous-Marin, CT : Contre-Torpilleur, CR : Croiseur, PA : Porte-Avion
 
 typedef struct EtatCase EtatCase;
 struct EtatCase
@@ -32,7 +35,12 @@ struct GrilleCellule
     EtatCase grilleCellule[11][23];
 };
 
-
+typedef struct Navire Navire;
+struct Navire
+{
+	char nom[20];
+	int taille;
+};
 
 
 #endif /* DONNEES_H_ */

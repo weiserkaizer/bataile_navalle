@@ -11,11 +11,12 @@
 //#include "donnees.h"
 #include "fonction_graph.h"
 
-
-int saisieCoord(int *ligne, int *colonne); // demande saisie des coordonnees et renvoie un booleen sur la véracité de la saisie
-int saisieOrient(char orientation[2]);
+Navire * initTypeNavire();
 EtatCase ** initialisationJoueur();
-int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, int colonne, EtatCase ** plateau);
+int saisieCoord(int *ligne, int *colonne); // demande saisie des coordonnees et renvoie un booleen sur la véracité de la saisie
+int saisieOrient(char orientation[3]);
+int verifieCoordonnee(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
+void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
 
 
 #endif /* FONCTIONS_H_ */
