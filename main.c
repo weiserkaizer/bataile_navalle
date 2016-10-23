@@ -1,38 +1,60 @@
+/*
+ * main.c
+ *
+ *  Created on: 22 oct. 2016
+ *      Author: Nicolas
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <string.h>
+#include "fonctions.h"
 #include "fonction_graph.h"
+#include "donnees.h"
 
 int main()
 {
+	Navire * typeNavire = initTypeNavire();
+	EtatCase **joueur = initialisationJoueur();
+	EtatCase **ordinateur = initialisationJoueur();
+	afficher(joueur, ordinateur);
 
-    EtatCase Tj[10][10],To[10][10];
-    int i,j;
-    for(i=0;i<10;i++)
-    {
-        for(j=0;j<10;j++)
-        {
-            Tj[i][j]=creeVarEtat("celVide","1","n","u");
-            To[i][j]=creeVarEtat("celVide","1","n","u");
-        }
-    }
+	int i;
 
+	for(i = 0; i < 5; i++)
+	{
 
+		int ligne,colonne, bonneCoord, bonneOrientation;
+		char orientation[3];
 
-    afficher(Tj,To);
+		do
+		{
+		    printf("\nVeulliez placer le %s (%d cases) : ", typeNavire[i].nom, typeNavire[i].taille);
 
+			do
+			{
+				bonneCoord = saisieCoord(&ligne, &colonne);
 
-    int J;
-    scanf(&J);
+				if(bonneCoord == -1)
+				{
+					return 0;
+				}
+			}while(bonneCoord == 0);
 
+			do
+			{
+				bonneOrientation = saisieOrient(orientation);
 
+				if(bonneOrientation == -1)
+				{
+					return 0;
+				}
+			}while(bonneOrientation == 0);
 
+		}while(verifieCoordonnee(typeNavire[i].taille, orientation, ligne, colonne, joueur) == 0);
+		placerNavire(typeNavire[i].taille, orientation, ligne, colonne, joueur);
+		system("CLS");
+		afficher(joueur, ordinateur);
+	}
 
-
-
-
-
-    printf("Hello world!\n");
-    return 0;
+	return 0;
 }

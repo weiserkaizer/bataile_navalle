@@ -13,6 +13,38 @@
 #include "fonction_graph.h"
 
 
+Navire * initTypeNavire()
+{
+    Navire * typeNavire= malloc(sizeof(Navire)*5);
+    strcpy((typeNavire[0]).nom, "Torpilleur"); (typeNavire[0]).taille = 2;
+    strcpy((typeNavire[1]).nom, "Sous-Marin"); (typeNavire[1]).taille = 3;
+    strcpy((typeNavire[2]).nom, "Contre-Torpilleur"); (typeNavire[2]).taille = 3;
+    strcpy((typeNavire[3]).nom, "Croiseur"); (typeNavire[3]).taille = 4;
+    strcpy((typeNavire[4]).nom, "Porte-Avion"); (typeNavire[4]).taille = 5;
+
+    return typeNavire;
+}
+
+EtatCase ** initialisationJoueur()
+{
+	int i,j;
+	EtatCase ** grilleJoueur = malloc(sizeof(EtatCase *) * TAILLEPLATEAU);
+
+	for(i = 0; i < 10; i++)
+	{
+		grilleJoueur[i] = malloc(sizeof(EtatCase)* TAILLEPLATEAU);
+	}
+
+	for(i = 0; i < TAILLEPLATEAU; i++)
+	{
+		for(j = 0; j < TAILLEPLATEAU; j++)
+		{
+			grilleJoueur[i][j] = creeVarEtat("celVide", "NONE", "n", "NONE");
+		}
+	}
+
+	return grilleJoueur;
+}
 
 int saisieCoord(int *ligne, int *colonne)
 {
@@ -88,7 +120,7 @@ int saisieCoord(int *ligne, int *colonne)
 }
 
 
-int saisieOrient(char orient[2])
+int saisieOrient(char orient[3])
 {
 	const int tailleSaisie = 10;//nombre maximal de cararctere que peut entrer l'utilisateur
 	char saisie[tailleSaisie];
@@ -148,33 +180,12 @@ int saisieOrient(char orient[2])
 	break;
 	default : return 0;
 	}
+	orient[2] = '\0';
 
 	return 1;
 }
 
-EtatCase ** initialisationJoueur()
-{
-	int i,j;
-	EtatCase ** grilleJoueur = malloc(sizeof(EtatCase *) * TAILLEPLATEAU);
-
-	for(i = 0; i < 10; i++)
-	{
-		grilleJoueur[i] = malloc(sizeof(EtatCase)* TAILLEPLATEAU);
-	}
-
-	for(i = 0; i < TAILLEPLATEAU; i++)
-	{
-		for(j = 0; j < TAILLEPLATEAU; j++)
-		{
-			grilleJoueur[i][j] = creeVarEtat("CelVide", "NONE", "n", "NONE");
-		}
-	}
-
-	return grilleJoueur;
-}
-
-
-int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, int colonne, EtatCase ** plateau)
+int verifieCoordonnee(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau)
 {
 	int ajoutLigne, ajoutColonne;
 	//
@@ -202,7 +213,7 @@ int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, in
 	int testLigne = ligne + (ajoutLigne * (tailleNavire -1));
 	int testColonne = colonne + (ajoutColonne * (tailleNavire -1));
 
-	if( (strcmp((plateau[ligne][colonne]).cel, "CelVide") == 0) && (testLigne >= 0) && (testLigne <= (TAILLEPLATEAU - 1))
+	if( (strcmp((plateau[ligne][colonne]).cel, "celVide") == 0) && (testLigne >= 0) && (testLigne <= (TAILLEPLATEAU - 1))
 			&& (testColonne >= 0) && (testColonne <= (TAILLEPLATEAU - 1)) )
 	{
 		int i;
@@ -212,7 +223,7 @@ int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, in
 			ligne += ajoutLigne;
 			colonne += ajoutColonne;
 
-			if( strcmp((plateau[ligne][colonne]).cel, "CelVide") != 0 )
+			if( strcmp((plateau[ligne][colonne]).cel, "celVide") != 0 )
 			{
 				return 0;
 			}
@@ -225,7 +236,40 @@ int verifieCoordonnee(int tailleNavire, char orientationNavire[2], int ligne, in
 	}
 }
 
+void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau)
+{
+    int ajoutLigne, ajoutColonne, i;
+	//
+	if ( strcmp(orientationNavire, "V+") == 0 )
+	{
+		ajoutLigne = -1;
+		ajoutColonne = 0;
+	}
+	else if ( strcmp(orientationNavire, "V-") == 0 )
+	{
+		ajoutLigne = 1;
+		ajoutColonne = 0;
+	}
+	else if ( strcmp(orientationNavire, "H+") == 0 )
+	{
+		ajoutLigne = 0;
+		ajoutColonne = 1;
+	}
+	else if ( strcmp(orientationNavire, "H-") == 0 )
+	{
+		ajoutLigne = 0;
+		ajoutColonne = -1;
+	}
 
+	//
+	for(i = 0; i<tailleNavire; i++)
+    {
+        strcpy(plateau[ligne][colonne].cel,"bateau");
+		strcpy(plateau[ligne][colonne].etat, "t");
+		ligne += ajoutLigne;
+        colonne += ajoutColonne;
+    }
+}
 
 
 
