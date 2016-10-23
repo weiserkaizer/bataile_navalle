@@ -25,7 +25,7 @@ struct EtatCase
 typedef struct cellule cellule;
 struct cellule
 {
-    char ligne1[20],ligne2[20],ligne3[20];
+    char ligne1[20],ligne2[20],ligne3[20],ligne4[20],ligne5[20];
 };
 
 typedef struct GrilleCellule GrilleCellule;
