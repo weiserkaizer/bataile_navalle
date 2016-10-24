@@ -265,7 +265,7 @@ void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int co
 	for(i = 0; i<tailleNavire; i++)
     {
         strcpy(plateau[ligne][colonne].cel,"bateau");
-		strcpy(plateau[ligne][colonne].etat, "t");
+		strcpy(plateau[ligne][colonne].etat, "n");
 		ligne += ajoutLigne;
         colonne += ajoutColonne;
     }

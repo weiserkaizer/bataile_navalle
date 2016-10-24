@@ -72,17 +72,17 @@ void afficher(EtatCase **Tj,EtatCase **To)
     T[0][9]=creeVarEtat("I","1","n","u");
     T[0][10]=creeVarEtat("J","1","n","u");
 
-    T[0][11]=creeVarEtat("celVide","1","n","u");
-    T[1][11]=creeVarEtat("celVide","1","n","u");
-    T[2][11]=creeVarEtat("celVide","1","n","u");
-    T[3][11]=creeVarEtat("celVide","1","n","u");
-    T[4][11]=creeVarEtat("celVide","1","n","u");
-    T[5][11]=creeVarEtat("celVide","1","n","u");
-    T[6][11]=creeVarEtat("celVide","1","n","u");
-    T[7][11]=creeVarEtat("celVide","1","n","u");
-    T[8][11]=creeVarEtat("celVide","1","n","u");
-    T[9][11]=creeVarEtat("celVide","1","n","u");
-    T[10][11]=creeVarEtat("celVide","1","n","u");
+    T[0][11]=creeVarEtat("sep","1","n","u");
+    T[1][11]=creeVarEtat("sep","1","n","u");
+    T[2][11]=creeVarEtat("sep","1","n","u");
+    T[3][11]=creeVarEtat("sep","1","n","u");
+    T[4][11]=creeVarEtat("sep","1","n","u");
+    T[5][11]=creeVarEtat("sep","1","n","u");
+    T[6][11]=creeVarEtat("sep","1","n","u");
+    T[7][11]=creeVarEtat("sep","1","n","u");
+    T[8][11]=creeVarEtat("sep","1","n","u");
+    T[9][11]=creeVarEtat("sep","1","n","u");
+    T[10][11]=creeVarEtat("sep","1","n","u");
 
     T[0][12]=creeVarEtat("celVide","1","n","u");
     T[0][13]=creeVarEtat("A","1","n","u");
@@ -132,6 +132,8 @@ void afficher(EtatCase **Tj,EtatCase **To)
 
 
     //affichage
+
+    system("CLS");
 
     int l;
     j=0;
@@ -185,9 +187,9 @@ cellule creeCellule(EtatCase T)
         if(egalA(T.etat,"n")==1)
         {
             strcpy(cel.ligne1,"|---------|");
-            strcpy(cel.ligne2,"|         |");
-            strcpy(cel.ligne3,"|         |");
-            strcpy(cel.ligne4,"|         |");
+            strcpy(cel.ligne2,"|#########|");
+            strcpy(cel.ligne3,"|#########|");
+            strcpy(cel.ligne4,"|#########|");
             strcpy(cel.ligne5,"|---------|");
         }
         else if(egalA(T.etat,"t")==1)
@@ -395,6 +397,17 @@ cellule creeCellule(EtatCase T)
         strcpy(cel.ligne3,"|   10    |");
         strcpy(cel.ligne4,"|         |");
         strcpy(cel.ligne5,"|---------|");
+    }
+
+    //cellues de séparation
+
+    else if(egalA(T.cel,"sep")==1)
+    {
+        strcpy(cel.ligne1,"   |||||   ");
+        strcpy(cel.ligne2,"   |||||   ");
+        strcpy(cel.ligne3,"   |||||   ");
+        strcpy(cel.ligne4,"   |||||   ");
+        strcpy(cel.ligne5,"   |||||   ");
     }
 
     //cellules porte avion

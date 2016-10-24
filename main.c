@@ -20,7 +20,7 @@ int main()
 
 	int i;
 
-	for(i = 0; i < 5; i++)
+	for(i = 4; i >= 0; i--)
 	{
 
 		int ligne,colonne, bonneCoord, bonneOrientation;
@@ -52,7 +52,7 @@ int main()
 
 		}while(verifieCoordonnee(typeNavire[i].taille, orientation, ligne, colonne, joueur) == 0);
 		placerNavire(typeNavire[i].taille, orientation, ligne, colonne, joueur);
-		system("CLS");
+		//system("CLS");
 		afficher(joueur, ordinateur);
 	}
 
