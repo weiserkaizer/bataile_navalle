@@ -52,10 +52,23 @@ EtatCase creeVarEtat(char ch[20],char ch1[20],char ch2[20],char ch3[20])
     return(T);
 };
 
+//Afficher l'intro
+
+void intro()
+{
+    printf("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t       BATAILLE NAVALE\n\n");
+    printf("Bienvenue Joueur\n\nEntrez 1 pour commencer une nouvelle partie\n\nEntrez 2 pour charger la derniere partie jouee\n\nEntrez 3 pour revoir la derniere partie jouee\n\n");
+}
+
+
+
+
 //cr�ation d'un tableau contenant les information d'affichage de toute les cellule
 
 void afficher(EtatCase **Tj,EtatCase **To)
 {
+    system("CLS");
+    printf("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t       BATAILLE NAVALE\n\n");
     EtatCase T[11][23];
 
     //mise en place des cases constante
@@ -133,7 +146,7 @@ void afficher(EtatCase **Tj,EtatCase **To)
 
     //affichage
 
-    system("CLS");
+
 
     int l;
     j=0;

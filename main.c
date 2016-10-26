@@ -13,9 +13,11 @@
 
 int main()
 {
+    system("CLS");
 	Navire * typeNavire = initTypeNavire();
 	EtatCase **joueur = initialisationJoueur();
 	EtatCase **ordinateur = initialisationJoueur();
+    intro();
 	afficher(joueur, ordinateur);
 
 	int i;
@@ -55,6 +57,7 @@ int main()
 		//system("CLS");
 		afficher(joueur, ordinateur);
 	}
+
 
 	return 0;
 }

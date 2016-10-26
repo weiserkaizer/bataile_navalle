@@ -9,6 +9,7 @@ EtatCase creeVarEtat(char ch[20],char ch1[20],char ch2[20],char ch3[20]);
 int egalA(char ch1[],char ch2[]);
 void afficher(EtatCase **Tj,EtatCase **To);
 cellule creeCellule(EtatCase T);
+void intro();
 
 
 

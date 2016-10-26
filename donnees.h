@@ -9,7 +9,9 @@
 #define DONNEES_H_
 
 
-#define TAILLEPLATEAU 10			//Dimension du plateau de jeu (un carré)
+#define TAILLEPLATEAU 10
+
+	//Dimension du plateau de jeu (un carré)
 
 //TO : Torpilleur, SM: Sous-Marin, CT : Contre-Torpilleur, CR : Croiseur, PA : Porte-Avion
 
@@ -41,6 +43,14 @@ struct Navire
 	char nom[20];
 	int taille;
 };
+
+/*typedef struct ListeAffiche ListeAffiche
+struct ListeAffiche
+{
+    char *phrase;
+    ListeAffiche *suivant;
+
+};*/
 
 
 #endif /* DONNEES_H_ */
