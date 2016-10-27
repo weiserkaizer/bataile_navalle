@@ -7,16 +7,20 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "fonctions.h"
 #include "fonction_graph.h"
 #include "donnees.h"
 
 int main()
 {
+	srand(time(NULL)); //Initialisation de la seed avec le temps machine pour la génération de nombre pseudo-aléatoire
     system("CLS");
+
 	Navire * typeNavire = initTypeNavire();
 	EtatCase **joueur = initialisationJoueur();
 	EtatCase **ordinateur = initialisationJoueur();
+
     intro();
 	afficher(joueur, ordinateur);
 
@@ -58,6 +62,11 @@ int main()
 		afficher(joueur, ordinateur);
 	}
 
+	placementNavireOrdinateur(ordinateur, typeNavire);
+
+	afficher(joueur, ordinateur);
+
+	system("pause");
 
 	return 0;
 }

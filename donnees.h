@@ -9,9 +9,7 @@
 #define DONNEES_H_
 
 
-#define TAILLEPLATEAU 10
-
-	//Dimension du plateau de jeu (un carré)
+#define TAILLEPLATEAU 10	//Dimension du plateau de jeu (un carré)
 
 //TO : Torpilleur, SM: Sous-Marin, CT : Contre-Torpilleur, CR : Croiseur, PA : Porte-Avion
 

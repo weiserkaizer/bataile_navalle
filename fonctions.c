@@ -271,11 +271,51 @@ void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int co
     }
 }
 
+void positionAleatoire(int *ligne, int *colonne)
+{
+	// Génére 2 nombre pseudo-aléatoire entre [0,TAILLEPLATEAU[
+	*ligne = (int)( rand() / (double) RAND_MAX * (TAILLEPLATEAU - 1));
+	*colonne = (int)( rand() / (double) RAND_MAX * (TAILLEPLATEAU - 1));
+}
 
 
+void orientationAleatoire(char orientation[3])
+{
+	if ( rand() <= RAND_MAX/4 )
+	{
+		strcpy(orientation, "H+");
+	}
+	else if ( (rand() > RAND_MAX/4) && (rand() <= RAND_MAX/2) )
+	{
+		strcpy(orientation, "V+");
+	}
+	else if ( (rand() > RAND_MAX/2) && (rand() <= 3*(RAND_MAX/4)) )
+	{
+		strcpy(orientation, "H-");
+	}
+	else
+	{
+		strcpy(orientation, "V-");
+	}
+	orientation[2] = '\0';
+}
 
+void placementNavireOrdinateur(EtatCase ** plateauOrdi, Navire *listeNavire)
+{
+	int ligne , colonne, i;
+	char orientation[3];
 
+	for (i = 4; i >= 0; i--)
+	{
+		do
+		{
+			positionAleatoire(&ligne, &colonne);
+			orientationAleatoire(orientation);
+		}while(verifieCoordonnee(listeNavire[i].taille, orientation, ligne, colonne, plateauOrdi) == 0);
 
+		placerNavire(listeNavire[i].taille, orientation, ligne, colonne, plateauOrdi);
+	}
+}
 
 
 

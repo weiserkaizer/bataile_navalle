@@ -17,6 +17,8 @@ int saisieCoord(int *ligne, int *colonne); // demande saisie des coordonnees et 
 int saisieOrient(char orientation[3]);
 int verifieCoordonnee(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
 void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
-
+void positionAleatoire(int *ligne, int *colonne);
+void orientationAleatoire(char *orientation);
+void placementNavireOrdinateur(EtatCase ** plateauOrdi, Navire *listeNavire);
 
 #endif /* FONCTIONS_H_ */
