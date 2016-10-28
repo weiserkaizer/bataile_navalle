@@ -16,11 +16,24 @@
 Navire * initTypeNavire()
 {
     Navire * typeNavire= malloc(sizeof(Navire)*5);
-    strcpy((typeNavire[0]).nom, "Torpilleur"); (typeNavire[0]).taille = 2;
-    strcpy((typeNavire[1]).nom, "Sous-Marin"); (typeNavire[1]).taille = 3;
-    strcpy((typeNavire[2]).nom, "Contre-Torpilleur"); (typeNavire[2]).taille = 3;
-    strcpy((typeNavire[3]).nom, "Croiseur"); (typeNavire[3]).taille = 4;
-    strcpy((typeNavire[4]).nom, "Porte-Avion"); (typeNavire[4]).taille = 5;
+
+    strcpy((typeNavire[0]).nom, "Torpilleur"); strcpy((typeNavire[0]).acronyme, "TO"); (typeNavire[0]).taille = 2;
+    strcpy((typeNavire[1]).nom, "Sous-Marin"); strcpy((typeNavire[1]).acronyme, "SM"); (typeNavire[1]).taille = 3;
+    strcpy((typeNavire[2]).nom, "Contre-Torpilleur"); strcpy((typeNavire[2]).acronyme, "CT"); (typeNavire[2]).taille = 3;
+    strcpy((typeNavire[3]).nom, "Croiseur");strcpy((typeNavire[3]).acronyme, "CR"); (typeNavire[3]).taille = 4;
+    strcpy((typeNavire[4]).nom, "Porte-Avion"); strcpy((typeNavire[4]).acronyme, "PA"); (typeNavire[4]).taille = 5;
+
+    int i;
+    for(i = 0; i<5; i++)
+    {
+    	(typeNavire[i].acronyme)[2] = '\0';
+
+    	strcpy(navireJoueur[i].acronyme,typeNavire[i].acronyme);
+    	navireJoueur[i].survivabilite = typeNavire[i].taille;
+
+    	strcpy(navireOrdinateur[i].acronyme,typeNavire[i].acronyme);
+    	navireOrdinateur[i].survivabilite = typeNavire[i].taille;
+    }
 
     return typeNavire;
 }
@@ -236,40 +249,242 @@ int verifieCoordonnee(int tailleNavire, char orientationNavire[3], int ligne, in
 	}
 }
 
-void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau)
+void placerNavire(Navire *listeNavire, int numNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau, char player)
 {
     int ajoutLigne, ajoutColonne, i;
+    EtatNavire *etatNavirePlayer;
+
+	if(player == 'J')
+	{
+		etatNavirePlayer = navireJoueur;
+	}
+	else if(player == 'O')
+	{
+		etatNavirePlayer = navireOrdinateur;
+	}
 	//
+    char orien[2];
 	if ( strcmp(orientationNavire, "V+") == 0 )
 	{
 		ajoutLigne = -1;
 		ajoutColonne = 0;
+		strcpy(orien,"u");
+		orien[1]='\0';
 	}
 	else if ( strcmp(orientationNavire, "V-") == 0 )
 	{
 		ajoutLigne = 1;
 		ajoutColonne = 0;
+		strcpy(orien,"d");
+		orien[1]='\0';
 	}
 	else if ( strcmp(orientationNavire, "H+") == 0 )
 	{
 		ajoutLigne = 0;
 		ajoutColonne = 1;
+		strcpy(orien,"r");
+		orien[1]='\0';
 	}
 	else if ( strcmp(orientationNavire, "H-") == 0 )
 	{
 		ajoutLigne = 0;
 		ajoutColonne = -1;
+		strcpy(orien,"l");
+		orien[1]='\0';
 	}
 
 	//
-	for(i = 0; i<tailleNavire; i++)
+	etatNavirePlayer[numNavire].ligneExtrem1 = ligne;
+	etatNavirePlayer[numNavire].colonneExtrem1 = colonne;
+
+	for(i = listeNavire[numNavire].taille; i > 0; i--)
     {
-        strcpy(plateau[ligne][colonne].cel,"bateau");
+		char position[3];
+		itoa (i,position,10);								//convertie i en ASCII en base 10
+        strcpy(plateau[ligne][colonne].cel,listeNavire[numNavire].acronyme);
+		strcpy(plateau[ligne][colonne].position, position);
 		strcpy(plateau[ligne][colonne].etat, "n");
+		strcpy(plateau[ligne][colonne].orientation, orien);
 		ligne += ajoutLigne;
         colonne += ajoutColonne;
     }
+
+	etatNavirePlayer[numNavire].ligneExtrem2 = (ligne - ajoutLigne);
+	etatNavirePlayer[numNavire].colonneExtrem2 = (colonne - ajoutColonne);
 }
+
+void positionAleatoire(int *ligne, int *colonne)
+{
+	// Génére 2 nombre pseudo-aléatoire entre [0,TAILLEPLATEAU[
+	*ligne = (int)( rand() / (double) RAND_MAX * (TAILLEPLATEAU - 1));
+	*colonne = (int)( rand() / (double) RAND_MAX * (TAILLEPLATEAU - 1));
+}
+
+
+void orientationAleatoire(char orientation[3])
+{
+	if ( rand() <= RAND_MAX/4 )
+	{
+		strcpy(orientation, "H+");
+	}
+	else if ( (rand() > RAND_MAX/4) && (rand() <= RAND_MAX/2) )
+	{
+		strcpy(orientation, "V+");
+	}
+	else if ( (rand() > RAND_MAX/2) && (rand() <= 3*(RAND_MAX/4)) )
+	{
+		strcpy(orientation, "H-");
+	}
+	else
+	{
+		strcpy(orientation, "V-");
+	}
+	orientation[2] = '\0';
+}
+
+void placementNavireOrdinateur(EtatCase ** plateauOrdi, Navire *listeNavire)
+{
+	int ligne , colonne, i;
+	char orientation[3];
+
+	for (i = 4; i >= 0; i--)
+	{
+		do
+		{
+			positionAleatoire(&ligne, &colonne);
+			orientationAleatoire(orientation);
+		}while(verifieCoordonnee(listeNavire[i].taille, orientation, ligne, colonne, plateauOrdi) == 0);
+
+		placerNavire(listeNavire, i, orientation, ligne, colonne, plateauOrdi, 'O');
+	}
+}
+
+int verificationTire(EtatCase **plateau, int ligne, int colonne)
+{
+	//Si bateau est déjà touché à cette position on retourne 2; si on le touche on retourne 1; si c'est de l'eau on retourne 0
+
+	if ( strcmp(plateau[ligne][colonne].cel, "celVide") == 0 )
+	{
+		return 0;
+	}
+	else if ( strcmp(plateau[ligne][colonne].etat, "n") == 0)
+	{
+		return 1;
+	}
+	else if ( (strcmp(plateau[ligne][colonne].etat, "t") == 0) || (strcmp(plateau[ligne][colonne].etat, "c") == 0) )
+	{
+		return 2;
+	}
+
+	return -1;
+}
+
+void coulerNavire(EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int colonneExtrem1, int colonneExtrem2)
+{
+	int ecartLigne = ligneExtrem2 - ligneExtrem1;
+	int ecartColonne = colonneExtrem2 - colonneExtrem1;
+
+	if(ecartLigne == 0)
+	{
+		if(ecartColonne < 0)
+		{
+			while(colonneExtrem1 >= colonneExtrem2)
+			{
+				strcpy(plateau[ligneExtrem1][colonneExtrem1].etat,"c");
+				colonneExtrem1--;
+			}
+		}
+		else
+		{
+			while(colonneExtrem2 >= colonneExtrem1)
+			{
+				strcpy(plateau[ligneExtrem1][colonneExtrem2].etat,"c");
+				colonneExtrem2--;
+			}
+		}
+	}
+	else
+	{
+		if(ecartLigne < 0)
+		{
+			while(ligneExtrem1 >= ligneExtrem2)
+			{
+				strcpy(plateau[ligneExtrem1][colonneExtrem1].etat,"c");
+				ligneExtrem1--;
+			}
+		}
+		else
+		{
+			while(ligneExtrem2 >= ligneExtrem1)
+			{
+				strcpy(plateau[ligneExtrem2][colonneExtrem1].etat,"c");
+				ligneExtrem2--;
+			}
+		}
+	}
+
+}
+
+void toucherNavire(EtatCase ** plateau,char player, int ligne, int colonne)
+{
+	int i = 0;
+	char *navire = plateau[ligne][colonne].cel;
+	EtatNavire *etatNavirePlayer;
+
+	if(player == 'J')
+	{
+		etatNavirePlayer = navireJoueur;
+	}
+	else if(player == 'O')
+	{
+		etatNavirePlayer = navireOrdinateur;
+	}
+
+	while(strcmp(navire, etatNavirePlayer[i].acronyme) != 0)
+	{
+		i++;
+	}
+
+	if(etatNavirePlayer[i].survivabilite == 1)
+	{
+		coulerNavire(plateau,etatNavirePlayer[i].ligneExtrem1, etatNavirePlayer[i].ligneExtrem2, etatNavirePlayer[i].colonneExtrem1, etatNavirePlayer[i].colonneExtrem2);
+		etatNavirePlayer[i].survivabilite -= 1;
+	}
+	else
+	{
+		strcpy(plateau[ligne][colonne].etat,"t");
+		etatNavirePlayer[i].survivabilite -= 1;
+	}
+}
+
+void tirer(EtatCase ** plateau, char player)
+{
+	int ligne, colonne, verifieSaisie, verifieTire;
+	do
+	{
+		verifieSaisie = saisieCoord(&ligne, &colonne);
+	}while(verifieSaisie == 0);
+
+	verifieTire = verificationTire(plateau, ligne, colonne);
+
+	switch(verifieTire)
+	{
+	//case 0: tirer(plateau, player);
+	//		break;
+	case 1:	toucherNavire(plateau, player, ligne, colonne);
+	//case 2: tirer(plateau, player);
+			break;
+	//case -1: tirer(plateau, player);
+	//		break;
+	default :break;
+	}
+
+}
+
+
+
+
+
 
 
 

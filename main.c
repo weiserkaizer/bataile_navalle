@@ -7,20 +7,26 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "fonctions.h"
 #include "fonction_graph.h"
 #include "donnees.h"
 
 int main()
 {
+	srand(time(NULL)); //Initialisation de la seed avec le temps machine pour la génération de nombre pseudo-aléatoire
     system("CLS");
+
 	Navire * typeNavire = initTypeNavire();
 	EtatCase **joueur = initialisationJoueur();
 	EtatCase **ordinateur = initialisationJoueur();
+
     intro();
 	afficher(joueur, ordinateur);
 
 	int i;
+
+	for(i = 4; i >= 0; i--) printf("%s %d\n", navireJoueur[i].acronyme, navireJoueur[i].survivabilite);
 
 	for(i = 4; i >= 0; i--)
 	{
@@ -53,11 +59,25 @@ int main()
 			}while(bonneOrientation == 0);
 
 		}while(verifieCoordonnee(typeNavire[i].taille, orientation, ligne, colonne, joueur) == 0);
-		placerNavire(typeNavire[i].taille, orientation, ligne, colonne, joueur);
+		placerNavire(typeNavire, i, orientation, ligne, colonne, joueur,'J');
 		//system("CLS");
 		afficher(joueur, ordinateur);
 	}
 
+	placementNavireOrdinateur(ordinateur, typeNavire);
+
+	afficher(joueur, ordinateur);
+
+	while(1)
+	{
+		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
+		tirer(ordinateur, 'O');
+		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
+		//system("pause");
+		afficher(joueur, ordinateur);
+	}
+
+	system("pause");
 
 	return 0;
 }
