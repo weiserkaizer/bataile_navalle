@@ -39,6 +39,7 @@ typedef struct Navire Navire;
 struct Navire
 {
 	char nom[20];
+	char acronyme[3];
 	int taille;
 };
 

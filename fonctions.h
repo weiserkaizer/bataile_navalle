@@ -16,7 +16,7 @@ EtatCase ** initialisationJoueur();
 int saisieCoord(int *ligne, int *colonne); // demande saisie des coordonnees et renvoie un booleen sur la véracité de la saisie
 int saisieOrient(char orientation[3]);
 int verifieCoordonnee(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
-void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
+void placerNavire(Navire *navire, int numNavire,char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau);
 void positionAleatoire(int *ligne, int *colonne);
 void orientationAleatoire(char *orientation);
 void placementNavireOrdinateur(EtatCase ** plateauOrdi, Navire *listeNavire);

@@ -16,11 +16,17 @@
 Navire * initTypeNavire()
 {
     Navire * typeNavire= malloc(sizeof(Navire)*5);
-    strcpy((typeNavire[0]).nom, "Torpilleur"); (typeNavire[0]).taille = 2;
-    strcpy((typeNavire[1]).nom, "Sous-Marin"); (typeNavire[1]).taille = 3;
-    strcpy((typeNavire[2]).nom, "Contre-Torpilleur"); (typeNavire[2]).taille = 3;
-    strcpy((typeNavire[3]).nom, "Croiseur"); (typeNavire[3]).taille = 4;
-    strcpy((typeNavire[4]).nom, "Porte-Avion"); (typeNavire[4]).taille = 5;
+    strcpy((typeNavire[0]).nom, "Torpilleur"); strcpy((typeNavire[0]).acronyme, "TO"); (typeNavire[0]).taille = 2;
+    strcpy((typeNavire[1]).nom, "Sous-Marin"); strcpy((typeNavire[1]).acronyme, "SM"); (typeNavire[1]).taille = 3;
+    strcpy((typeNavire[2]).nom, "Contre-Torpilleur"); strcpy((typeNavire[2]).acronyme, "CT"); (typeNavire[2]).taille = 3;
+    strcpy((typeNavire[3]).nom, "Croiseur");strcpy((typeNavire[3]).acronyme, "CR"); (typeNavire[3]).taille = 4;
+    strcpy((typeNavire[4]).nom, "Porte-Avion"); strcpy((typeNavire[4]).acronyme, "PA"); (typeNavire[4]).taille = 5;
+
+    int i;
+    for(i = 0; i<5; i++)
+    {
+    	(typeNavire[i].acronyme)[2] = '\0';
+    }
 
     return typeNavire;
 }
@@ -236,36 +242,49 @@ int verifieCoordonnee(int tailleNavire, char orientationNavire[3], int ligne, in
 	}
 }
 
-void placerNavire(int tailleNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau)
+void placerNavire(Navire *listeNavire, int numNavire, char orientationNavire[3], int ligne, int colonne, EtatCase ** plateau)
 {
     int ajoutLigne, ajoutColonne, i;
 	//
+    char orien[2];
 	if ( strcmp(orientationNavire, "V+") == 0 )
 	{
 		ajoutLigne = -1;
 		ajoutColonne = 0;
+		strcpy(orien,"u");
+		orien[1]='\0';
 	}
 	else if ( strcmp(orientationNavire, "V-") == 0 )
 	{
 		ajoutLigne = 1;
 		ajoutColonne = 0;
+		strcpy(orien,"d");
+		orien[1]='\0';
 	}
 	else if ( strcmp(orientationNavire, "H+") == 0 )
 	{
 		ajoutLigne = 0;
 		ajoutColonne = 1;
+		strcpy(orien,"r");
+		orien[1]='\0';
 	}
 	else if ( strcmp(orientationNavire, "H-") == 0 )
 	{
 		ajoutLigne = 0;
 		ajoutColonne = -1;
+		strcpy(orien,"l");
+		orien[1]='\0';
 	}
 
 	//
-	for(i = 0; i<tailleNavire; i++)
+	for(i = listeNavire[numNavire].taille; i > 0; i--)
     {
-        strcpy(plateau[ligne][colonne].cel,"bateau");
+		char position[3];
+		itoa (i,position,10);								//convertie i en ASCII en base 10
+        strcpy(plateau[ligne][colonne].cel,listeNavire[numNavire].acronyme);
+		strcpy(plateau[ligne][colonne].position, position);
 		strcpy(plateau[ligne][colonne].etat, "n");
+		strcpy(plateau[ligne][colonne].orientation, orien);
 		ligne += ajoutLigne;
         colonne += ajoutColonne;
     }
@@ -313,7 +332,7 @@ void placementNavireOrdinateur(EtatCase ** plateauOrdi, Navire *listeNavire)
 			orientationAleatoire(orientation);
 		}while(verifieCoordonnee(listeNavire[i].taille, orientation, ligne, colonne, plateauOrdi) == 0);
 
-		placerNavire(listeNavire[i].taille, orientation, ligne, colonne, plateauOrdi);
+		placerNavire(listeNavire, i, orientation, ligne, colonne, plateauOrdi);
 	}
 }
 

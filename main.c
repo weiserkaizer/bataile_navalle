@@ -57,7 +57,7 @@ int main()
 			}while(bonneOrientation == 0);
 
 		}while(verifieCoordonnee(typeNavire[i].taille, orientation, ligne, colonne, joueur) == 0);
-		placerNavire(typeNavire[i].taille, orientation, ligne, colonne, joueur);
+		placerNavire(typeNavire, i, orientation, ligne, colonne, joueur);
 		//system("CLS");
 		afficher(joueur, ordinateur);
 	}
