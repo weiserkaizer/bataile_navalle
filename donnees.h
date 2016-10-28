@@ -43,6 +43,19 @@ struct Navire
 	int taille;
 };
 
+typedef struct EtatNavire EtatNavire;
+struct EtatNavire
+{
+	char acronyme[3];
+	int survivabilite;
+	int ligneExtrem1, ligneExtrem2;
+	int colonneExtrem1, colonneExtrem2;
+
+};
+
+EtatNavire navireJoueur[5], navireOrdinateur[5];
+
+
 /*typedef struct ListeAffiche ListeAffiche
 struct ListeAffiche
 {
