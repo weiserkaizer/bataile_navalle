@@ -26,6 +26,8 @@ int main()
 
 	int i;
 
+	for(i = 4; i >= 0; i--) printf("%s %d\n", navireJoueur[i].acronyme, navireJoueur[i].survivabilite);
+
 	for(i = 4; i >= 0; i--)
 	{
 
@@ -68,7 +70,10 @@ int main()
 
 	while(1)
 	{
+		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
 		tirer(ordinateur, 'O');
+		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
+		//system("pause");
 		afficher(joueur, ordinateur);
 	}
 

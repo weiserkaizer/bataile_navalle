@@ -381,8 +381,8 @@ int verificationTire(EtatCase **plateau, int ligne, int colonne)
 
 void coulerNavire(EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int colonneExtrem1, int colonneExtrem2)
 {
-	const int ecartLigne = ligneExtrem2 - ligneExtrem1;
-	const int ecartColonne = colonneExtrem2 - colonneExtrem2;
+	int ecartLigne = ligneExtrem2 - ligneExtrem1;
+	int ecartColonne = colonneExtrem2 - colonneExtrem1;
 
 	if(ecartLigne == 0)
 	{
@@ -399,7 +399,7 @@ void coulerNavire(EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int co
 			while(colonneExtrem2 >= colonneExtrem1)
 			{
 				strcpy(plateau[ligneExtrem1][colonneExtrem2].etat,"c");
-				ligneExtrem2--;
+				colonneExtrem2--;
 			}
 		}
 	}
@@ -423,7 +423,6 @@ void coulerNavire(EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int co
 		}
 	}
 
-
 }
 
 void toucherNavire(EtatCase ** plateau,char player, int ligne, int colonne)
@@ -446,14 +445,15 @@ void toucherNavire(EtatCase ** plateau,char player, int ligne, int colonne)
 		i++;
 	}
 
-	etatNavirePlayer[i].survivabilite -= 1;
-	if(etatNavirePlayer[i].survivabilite == 0)
+	if(etatNavirePlayer[i].survivabilite == 1)
 	{
 		coulerNavire(plateau,etatNavirePlayer[i].ligneExtrem1, etatNavirePlayer[i].ligneExtrem2, etatNavirePlayer[i].colonneExtrem1, etatNavirePlayer[i].colonneExtrem2);
+		etatNavirePlayer[i].survivabilite -= 1;
 	}
 	else
 	{
 		strcpy(plateau[ligne][colonne].etat,"t");
+		etatNavirePlayer[i].survivabilite -= 1;
 	}
 }
 
@@ -469,14 +469,14 @@ void tirer(EtatCase ** plateau, char player)
 
 	switch(verifieTire)
 	{
-	case 0: tirer(plateau, player);
+	//case 0: tirer(plateau, player);
+	//		break;
+	case 1:	toucherNavire(plateau, player, ligne, colonne);
+	//case 2: tirer(plateau, player);
 			break;
-	case 1: toucherNavire(plateau, player, ligne, colonne);
-			break;
-	case 2: tirer(plateau, player);
-			break;
-	case -1: tirer(plateau, player);
-			break;
+	//case -1: tirer(plateau, player);
+	//		break;
+	default :break;
 	}
 
 }
