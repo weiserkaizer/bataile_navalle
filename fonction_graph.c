@@ -1646,8 +1646,10 @@ cellule creeCellule(EtatCase T)
                     strcpy(cel.ligne3,"|#~&&~&&~#|");
                     strcpy(cel.ligne4,"|~&&~&&~&#|");
                     strcpy(cel.ligne5,"|---------|");
+                }
             }
-            }
+        }
+
 
         else if(egalA(T.position,"3")==1)
         {
@@ -1759,7 +1761,6 @@ cellule creeCellule(EtatCase T)
                 }
             }
         }
-    }
     }
 
     //cellules sous marin
