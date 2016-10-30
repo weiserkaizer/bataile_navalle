@@ -21,6 +21,8 @@ int main()
 	EtatCase **joueur = initialisationJoueur();
 	EtatCase **ordinateur = initialisationJoueur();
 
+	int  ligne,colonne, verifieSaisie;
+
     intro();
 	afficher(joueur, ordinateur);
 
@@ -31,7 +33,7 @@ int main()
 	for(i = 4; i >= 0; i--)
 	{
 
-		int ligne,colonne, bonneCoord, bonneOrientation;
+		int bonneCoord, bonneOrientation;
 		char orientation[3];
 
 		do
@@ -70,10 +72,16 @@ int main()
 
 	while(1)
 	{
+		do
+		{
+			verifieSaisie = saisieCoord(&ligne, &colonne);
+		}while(verifieSaisie == 0);
+
 		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
-		tirer(ordinateur, 'O');
+		tirer(ordinateur, 'O', ligne, colonne);
 		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
 		//system("pause");
+		tireAutomatique(joueur);
 		afficher(joueur, ordinateur);
 	}
 
