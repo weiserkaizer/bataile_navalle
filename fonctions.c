@@ -457,13 +457,9 @@ void toucherNavire(EtatCase ** plateau,char player, int ligne, int colonne)
 	}
 }
 
-void tirer(EtatCase ** plateau, char player)
+void tirer(EtatCase ** plateau, char player,int ligne,int colonne)
 {
-	int ligne, colonne, verifieSaisie, verifieTire;
-	do
-	{
-		verifieSaisie = saisieCoord(&ligne, &colonne);
-	}while(verifieSaisie == 0);
+	int verifieTire;
 
 	verifieTire = verificationTire(plateau, ligne, colonne);
 
@@ -481,6 +477,14 @@ void tirer(EtatCase ** plateau, char player)
 
 }
 
+void tireAutomatique(EtatCase ** plateau)
+{
+	int ligne, colonne;
+
+	positionAleatoire(&ligne, &colonne);
+
+	tirer(plateau, 'J', colonne, ligne);
+}
 
 
 

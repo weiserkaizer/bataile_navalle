@@ -24,6 +24,7 @@ void placementNavireOrdinateur(EtatCase ** plateauOrdi, Navire *listeNavire);
 int verificationTire(EtatCase **plateau, int ligne, int colonne);
 void coulerNavire(EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int colonneExtrem1, int colonneExtrem2);
 void toucherNavire(EtatCase ** plateau, char player, int ligne, int colonne);
-void tirer(EtatCase ** plateau, char player);
+void tirer(EtatCase ** plateau, char player, int ligne, int colonne);
+void tireAutomatique(EtatCase ** plateau);
 
 #endif /* FONCTIONS_H_ */
