@@ -502,13 +502,30 @@ void runIntro()
     }
     switch(choix)
     {
-        case 1 : printf("jouons"); break;
-        case 2 : printf("chargeons"); break;
-        case 3 : printf("visionnons"); break;
+        case 1 : printf("jouons"); jeu(); break;
+        case 2 : printf("chargeons"); reprise(); break;
+        case 3 : printf("visionnons"); replay(); break;
         default : printf("erreur"); break;
     }
 
 }
+
+void jeu()
+{
+
+}
+
+void reprise()
+{
+
+}
+
+void replay()
+{
+
+}
+
+
 
 
 

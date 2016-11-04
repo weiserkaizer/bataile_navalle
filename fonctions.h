@@ -28,5 +28,8 @@ void tirer(EtatCase ** plateau, char player, int ligne, int colonne);
 void tireAutomatique(EtatCase ** plateau);
 
 void runIntro();
+void jeu();
+void reprise();
+void replay();
 
 #endif /* FONCTIONS_H_ */
