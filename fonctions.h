@@ -27,4 +27,6 @@ void toucherNavire(EtatCase ** plateau, char player, int ligne, int colonne);
 void tirer(EtatCase ** plateau, char player, int ligne, int colonne);
 void tireAutomatique(EtatCase ** plateau);
 
+void runIntro();
+
 #endif /* FONCTIONS_H_ */

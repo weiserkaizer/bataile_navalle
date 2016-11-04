@@ -487,7 +487,28 @@ void tireAutomatique(EtatCase ** plateau)
 }
 
 
+void runIntro()
+{
+    int choix = 0;
+    while(choix<1 || choix>3)
+    {
 
+        printf("\tBienvenue joueur\n\n");
+        printf("\tQu'est ce que sa sera Aujourd'hui?\n\n");
+        printf("\tEntre 1 pour commencer une nouvelle partie\n\n");
+        printf("\tEntre 2 pour charger une partie\n\n");
+        printf("\tEntre 3 pour revisionner une partie\n\n");
+        scanf("%d",&choix);
+    }
+    switch(choix)
+    {
+        case 1 : printf("jouons"); break;
+        case 2 : printf("chargeons"); break;
+        case 3 : printf("visionnons"); break;
+        default : printf("erreur"); break;
+    }
+
+}
 
 
 
