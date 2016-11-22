@@ -465,8 +465,8 @@ void tirer(EtatCase ** plateau, char player,int ligne,int colonne)
 
 	switch(verifieTire)
 	{
-	//case 0: tirer(plateau, player);
-	//		break;
+	case 0: strcpy(plateau[ligne][colonne].etat, "t");
+			break;
 	case 1:	toucherNavire(plateau, player, ligne, colonne);
 	//case 2: tirer(plateau, player);
 			break;
