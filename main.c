@@ -14,6 +14,8 @@
 
 int main()
 {
+    //runIntro();
+
 	srand(time(NULL)); //Initialisation de la seed avec le temps machine pour la génération de nombre pseudo-aléatoire
     system("CLS");
 
@@ -86,6 +88,7 @@ int main()
 	}
 
 	system("pause");
+
 
 	return 0;
 }

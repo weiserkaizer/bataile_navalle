@@ -465,8 +465,8 @@ void tirer(EtatCase ** plateau, char player,int ligne,int colonne)
 
 	switch(verifieTire)
 	{
-	//case 0: tirer(plateau, player);
-	//		break;
+	case 0: strcpy(plateau[ligne][colonne].etat, "t");
+			break;
 	case 1:	toucherNavire(plateau, player, ligne, colonne);
 	//case 2: tirer(plateau, player);
 			break;
@@ -486,6 +486,44 @@ void tireAutomatique(EtatCase ** plateau)
 	tirer(plateau, 'J', colonne, ligne);
 }
 
+
+void runIntro()
+{
+    int choix = 0;
+    while(choix<1 || choix>3)
+    {
+
+        printf("\tBienvenue joueur\n\n");
+        printf("\tQu'est ce que sa sera Aujourd'hui?\n\n");
+        printf("\tEntre 1 pour commencer une nouvelle partie\n\n");
+        printf("\tEntre 2 pour charger une partie\n\n");
+        printf("\tEntre 3 pour revisionner une partie\n\n");
+        scanf("%d",&choix);
+    }
+    switch(choix)
+    {
+        case 1 : printf("jouons"); jeu(); break;
+        case 2 : printf("chargeons"); reprise(); break;
+        case 3 : printf("visionnons"); replay(); break;
+        default : printf("erreur"); break;
+    }
+
+}
+
+void jeu()
+{
+
+}
+
+void reprise()
+{
+
+}
+
+void replay()
+{
+
+}
 
 
 
