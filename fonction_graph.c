@@ -196,13 +196,23 @@ cellule creeCellule(EtatCase T)
 
     cellule cel;
 
-    if(egalA(T.cel,"bateau")==1)
+    if(egalA(T.cel,"ba")==1)
     {
-        strcpy(cel.ligne1,"|---------|");
-        strcpy(cel.ligne2,"|#~#~#~#~#|");
-        strcpy(cel.ligne3,"|#~#~#~#~#|");
-        strcpy(cel.ligne4,"|#~#~#~#~#|");
-        strcpy(cel.ligne5,"|---------|");
+        if((egalA(T.orientation,"l")==1) || (egalA(T.orientation,"r")==1)){
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"###~###~###");
+            strcpy(cel.ligne3,"##~##~##~##");
+            strcpy(cel.ligne4,"###~###~###");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        if((egalA(T.orientation,"u")==1) || (egalA(T.orientation,"d")==1)){
+            strcpy(cel.ligne1,"|###~###~#|");
+            strcpy(cel.ligne2,"|#~###~###|");
+            strcpy(cel.ligne3,"|##~###~##|");
+            strcpy(cel.ligne4,"|#~###~###|");
+            strcpy(cel.ligne5,"|###~###~#|");
+        }
+
     }
 
     //creation d'une cellule vide
@@ -220,9 +230,9 @@ cellule creeCellule(EtatCase T)
         else
         {
             strcpy(cel.ligne1,"|---------|");
-            strcpy(cel.ligne2,"|~ ~ ~ ~ ~|");
-            strcpy(cel.ligne3,"|~ ~ ~ ~ ~|");
-            strcpy(cel.ligne4,"|~ ~ ~ ~ ~|");
+            strcpy(cel.ligne2,"|~  ~ ~  ~|");
+            strcpy(cel.ligne3,"|  ~   ~ ~|");
+            strcpy(cel.ligne4,"|~   ~   ~|");
             strcpy(cel.ligne5,"|---------|");
         }
     }
