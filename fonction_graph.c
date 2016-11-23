@@ -2291,6 +2291,13 @@ cellule creeCellule(EtatCase T)
         }
 
     }
+    else{
+        strcpy(cel.ligne1,"|---------|");
+        strcpy(cel.ligne2,"|         |");
+        strcpy(cel.ligne3,"|         |");
+        strcpy(cel.ligne4,"|         |");
+        strcpy(cel.ligne5,"|---------|");
+    }
 
 
     return(cel);
