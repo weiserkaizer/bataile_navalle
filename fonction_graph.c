@@ -177,7 +177,8 @@ void afficher(EtatCase **Tj,EtatCase **To)
                 case 5 :
                     printf("%s",cel.ligne5);
                     break;
-                default : break;
+                default :
+                    break;
 
                 }
             }
@@ -197,31 +198,11 @@ cellule creeCellule(EtatCase T)
 
     if(egalA(T.cel,"bateau")==1)
     {
-        if(egalA(T.etat,"n")==1)
-        {
-            strcpy(cel.ligne1,"|---------|");
-            strcpy(cel.ligne2,"|#########|");
-            strcpy(cel.ligne3,"|#########|");
-            strcpy(cel.ligne4,"|#########|");
-            strcpy(cel.ligne5,"|---------|");
-        }
-        else if(egalA(T.etat,"t")==1)
-        {
-            strcpy(cel.ligne1,"|---------|");
-            strcpy(cel.ligne2,"|#~#~#~#~#|");
-            strcpy(cel.ligne3,"|#~#~#~#~#|");
-            strcpy(cel.ligne4,"|#~#~#~#~#|");
-            strcpy(cel.ligne5,"|---------|");
-        }
-        else if(egalA(T.etat,"c")==1)
-        {
-            strcpy(cel.ligne1,"|---------|");
-            strcpy(cel.ligne2,"|~~#~~#~~#|");
-            strcpy(cel.ligne3,"|~~#~~#~~#|");
-            strcpy(cel.ligne4,"|~~#~~#~~#|");
-            strcpy(cel.ligne5,"|---------|");
-        }
-
+        strcpy(cel.ligne1,"|---------|");
+        strcpy(cel.ligne2,"|#~#~#~#~#|");
+        strcpy(cel.ligne3,"|#~#~#~#~#|");
+        strcpy(cel.ligne4,"|#~#~#~#~#|");
+        strcpy(cel.ligne5,"|---------|");
     }
 
     //creation d'une cellule vide
@@ -638,311 +619,313 @@ cellule creeCellule(EtatCase T)
                 }
             }
         }
-        else if(egalA(T.position,"3")==1){
-            if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"###########");
-                    strcpy(cel.ligne3,"&&&&&&&&&&&");
-                    strcpy(cel.ligne4,"###########");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"###########");
-                    strcpy(cel.ligne3,"&&&&&&&&&&&");
-                    strcpy(cel.ligne4,"###########");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #&&&&&&#|");
-                    strcpy(cel.ligne2,"| #&&&&&&#|");
-                    strcpy(cel.ligne3,"| #&&&&&&#|");
-                    strcpy(cel.ligne4,"| #&&&&&&#|");
-                    strcpy(cel.ligne5,"| #&&&&&&#|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"| #&&&&&&#|");
-                    strcpy(cel.ligne2,"| #&&&&&&#|");
-                    strcpy(cel.ligne3,"| #&&&&&&#|");
-                    strcpy(cel.ligne4,"| #&&&&&&#|");
-                    strcpy(cel.ligne5,"| #&&&&&&#|");
-                }
-
-            }
-            else if(egalA(T.etat,"t")==1)
-            {
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"##~#~##~##~");
-                    strcpy(cel.ligne3,"~&&~&&~&&&~");
-                    strcpy(cel.ligne4,"##~#~##~##~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"##~#~##~##~");
-                    strcpy(cel.ligne3,"~&&~&&~&&&~");
-                    strcpy(cel.ligne4,"##~#~##~##~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #~&&~&&~|");
-                    strcpy(cel.ligne2,"| #~&&~&&~|");
-                    strcpy(cel.ligne3,"| ~&&&~&&#|");
-                    strcpy(cel.ligne4,"| #&~&&~&#|");
-                    strcpy(cel.ligne5,"| #&~&&~&#|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"| #~&&~&&~|");
-                    strcpy(cel.ligne2,"| #~&&~&&~|");
-                    strcpy(cel.ligne3,"| ~&&&~&&#|");
-                    strcpy(cel.ligne4,"| #&~&&~&#|");
-                    strcpy(cel.ligne5,"| #&~&&~&#|");
-                }
-            }
-            else if(egalA(T.etat,"c")==1)
-            {
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"~#~#~#~#~#~");
-                    strcpy(cel.ligne3,"~&~&~&~&~&~");
-                    strcpy(cel.ligne4,"~#~#~#~#~#~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"~#~#~#~#~#~");
-                    strcpy(cel.ligne3,"~&~&~&~&~&~");
-                    strcpy(cel.ligne4,"~#~#~#~#~#~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #~&~&~&~|");
-                    strcpy(cel.ligne2,"| #~&~&~&~|");
-                    strcpy(cel.ligne3,"| ~&~&~&~#|");
-                    strcpy(cel.ligne4,"| ~&~&~&~&|");
-                }
-            }
-        }
-        else if(egalA(T.position,"4")==1){
-            if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"###########");
-                    strcpy(cel.ligne3,"&&&&&&&&&&&");
-                    strcpy(cel.ligne4,"###########");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"###########");
-                    strcpy(cel.ligne3,"&&&&&&&&&&&");
-                    strcpy(cel.ligne4,"###########");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #&&&&&&#|");
-                    strcpy(cel.ligne2,"| #&&&&&&#|");
-                    strcpy(cel.ligne3,"| #&&&&&&#|");
-                    strcpy(cel.ligne4,"| #&&&&&&#|");
-                    strcpy(cel.ligne5,"| #&&&&&&#|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"| #&&&&&&#|");
-                    strcpy(cel.ligne2,"| #&&&&&&#|");
-                    strcpy(cel.ligne3,"| #&&&&&&#|");
-                    strcpy(cel.ligne4,"| #&&&&&&#|");
-                    strcpy(cel.ligne5,"| #&&&&&&#|");
-                }
-
-            }
-            else if(egalA(T.etat,"t")==1)
-            {
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"##~#~##~##~");
-                    strcpy(cel.ligne3,"~&&~&&~&&&~");
-                    strcpy(cel.ligne4,"##~#~##~##~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"##~#~##~##~");
-                    strcpy(cel.ligne3,"~&&~&&~&&&~");
-                    strcpy(cel.ligne4,"##~#~##~##~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #~&&~&&~|");
-                    strcpy(cel.ligne2,"| #~&&~&&~|");
-                    strcpy(cel.ligne3,"| ~&&&~&&#|");
-                    strcpy(cel.ligne4,"| #&~&&~&#|");
-                    strcpy(cel.ligne5,"| #&~&&~&#|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"| #~&&~&&~|");
-                    strcpy(cel.ligne2,"| #~&&~&&~|");
-                    strcpy(cel.ligne3,"| ~&&&~&&#|");
-                    strcpy(cel.ligne4,"| #&~&&~&#|");
-                    strcpy(cel.ligne5,"| #&~&&~&#|");
-                }
-            }
-            else if(egalA(T.etat,"c")==1)
-            {
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"~#~#~#~#~#~");
-                    strcpy(cel.ligne3,"~&~&~&~&~&~");
-                    strcpy(cel.ligne4,"~#~#~#~#~#~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"~#~#~#~#~#~");
-                    strcpy(cel.ligne3,"~&~&~&~&~&~");
-                    strcpy(cel.ligne4,"~#~#~#~#~#~");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #~&~&~&~|");
-                    strcpy(cel.ligne2,"| #~&~&~&~|");
-                    strcpy(cel.ligne3,"| ~&~&~&~#|");
-                    strcpy(cel.ligne4,"| ~&~&~&~&|");
-                }
-            }
-
-
-        else if(egalA(T.position,"5")==1)
+        else if(egalA(T.position,"3")==1)
         {
-            if(egalA(T.etat,"n")==1)
+            if(egalA(T.orientation,"l")==1)
             {
-
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"########  |");
-                    strcpy(cel.ligne3,"####&&&#  |");
-                    strcpy(cel.ligne4,"    ###   |");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"|  ########");
-                    strcpy(cel.ligne3,"|  ###&&&#");
-                    strcpy(cel.ligne4,"|   ###   ");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #&&&&#  |");
-                    strcpy(cel.ligne2,"| #&&&&#  |");
-                    strcpy(cel.ligne3,"| #&&&&&# |");
-                    strcpy(cel.ligne4,"|   ###   |");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"|   ###   |");
-                    strcpy(cel.ligne3,"| #&&&&&# |");
-                    strcpy(cel.ligne4,"| #&&&&#  |");
-                    strcpy(cel.ligne5,"| #&&&&#  |");
-                }
-
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"###########");
+                strcpy(cel.ligne3,"&&&&&&&&&&&");
+                strcpy(cel.ligne4,"###########");
+                strcpy(cel.ligne5,"|---------|");
             }
-            else if(egalA(T.etat,"t")==1)
+            else if(egalA(T.orientation,"r")==1)
             {
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"##~##~##  |");
-                    strcpy(cel.ligne3,"~##~&&~#  |");
-                    strcpy(cel.ligne4,"    #~#   |");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"|  ##~##~##");
-                    strcpy(cel.ligne3,"|  #~&&~##~");
-                    strcpy(cel.ligne4,"|   #~#    ");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"| #&&~&#  |");
-                    strcpy(cel.ligne2,"| #&~&&~  |");
-                    strcpy(cel.ligne3,"| #~&&~&# |");
-                    strcpy(cel.ligne4,"|   #~#   |");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"|   #~#   |");
-                    strcpy(cel.ligne3,"| #&~&&~# |");
-                    strcpy(cel.ligne4,"| #~&&~#  |");
-                    strcpy(cel.ligne5,"|-#&~&&~  |");
-                }
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"###########");
+                strcpy(cel.ligne3,"&&&&&&&&&&&");
+                strcpy(cel.ligne4,"###########");
+                strcpy(cel.ligne5,"|---------|");
             }
-            else if(egalA(T.etat,"c")==1)
+            else if(egalA(T.orientation,"u")==1)
             {
-                if(egalA(T.orientation,"l")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"~#~#~#~#  |");
-                    strcpy(cel.ligne3,"#~#~&~&~  |");
-                    strcpy(cel.ligne4,"    ~#~   |");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"r")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"|  #~#~#~#~");
-                    strcpy(cel.ligne3,"|  #~&~#~#~");
-                    strcpy(cel.ligne4,"|   ~#~    ");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"u")==1)
-                {
-                    strcpy(cel.ligne1,"|-~&~&~#  |");
-                    strcpy(cel.ligne2,"| #~&~&~  |");
-                    strcpy(cel.ligne3,"| #~&~&~# |");
-                    strcpy(cel.ligne4,"|   ~#~   |");
-                    strcpy(cel.ligne5,"|---------|");
-                }
-                else if(egalA(T.orientation,"d")==1)
-                {
-                    strcpy(cel.ligne1,"|---------|");
-                    strcpy(cel.ligne2,"|   ~#~   |");
-                    strcpy(cel.ligne3,"| ~&~&~&~ |");
-                    strcpy(cel.ligne4,"| ~&~&~#  |");
-                    strcpy(cel.ligne5,"|-#~&~&~  |");
-                }
+                strcpy(cel.ligne1,"| #&&&&&&#|");
+                strcpy(cel.ligne2,"| #&&&&&&#|");
+                strcpy(cel.ligne3,"| #&&&&&&#|");
+                strcpy(cel.ligne4,"| #&&&&&&#|");
+                strcpy(cel.ligne5,"| #&&&&&&#|");
+            }
+            else if(egalA(T.orientation,"d")==1)
+            {
+                strcpy(cel.ligne1,"| #&&&&&&#|");
+                strcpy(cel.ligne2,"| #&&&&&&#|");
+                strcpy(cel.ligne3,"| #&&&&&&#|");
+                strcpy(cel.ligne4,"| #&&&&&&#|");
+                strcpy(cel.ligne5,"| #&&&&&&#|");
+            }
+
+        }
+        else if(egalA(T.etat,"t")==1)
+        {
+            if(egalA(T.orientation,"l")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"##~#~##~##~");
+                strcpy(cel.ligne3,"~&&~&&~&&&~");
+                strcpy(cel.ligne4,"##~#~##~##~");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"r")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"##~#~##~##~");
+                strcpy(cel.ligne3,"~&&~&&~&&&~");
+                strcpy(cel.ligne4,"##~#~##~##~");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"u")==1)
+            {
+                strcpy(cel.ligne1,"| #~&&~&&~|");
+                strcpy(cel.ligne2,"| #~&&~&&~|");
+                strcpy(cel.ligne3,"| ~&&&~&&#|");
+                strcpy(cel.ligne4,"| #&~&&~&#|");
+                strcpy(cel.ligne5,"| #&~&&~&#|");
+            }
+            else if(egalA(T.orientation,"d")==1)
+            {
+                strcpy(cel.ligne1,"| #~&&~&&~|");
+                strcpy(cel.ligne2,"| #~&&~&&~|");
+                strcpy(cel.ligne3,"| ~&&&~&&#|");
+                strcpy(cel.ligne4,"| #&~&&~&#|");
+                strcpy(cel.ligne5,"| #&~&&~&#|");
             }
         }
+        else if(egalA(T.etat,"c")==1)
+        {
+            if(egalA(T.orientation,"l")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"~#~#~#~#~#~");
+                strcpy(cel.ligne3,"~&~&~&~&~&~");
+                strcpy(cel.ligne4,"~#~#~#~#~#~");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"r")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"~#~#~#~#~#~");
+                strcpy(cel.ligne3,"~&~&~&~&~&~");
+                strcpy(cel.ligne4,"~#~#~#~#~#~");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"u")==1)
+            {
+                strcpy(cel.ligne1,"| #~&~&~&~|");
+                strcpy(cel.ligne2,"| #~&~&~&~|");
+                strcpy(cel.ligne3,"| ~&~&~&~#|");
+                strcpy(cel.ligne4,"| ~&~&~&~&|");
+            }
+        }
+    }
+    else if(egalA(T.position,"4")==1)
+    {
+        if(egalA(T.orientation,"l")==1)
+        {
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"###########");
+            strcpy(cel.ligne3,"&&&&&&&&&&&");
+            strcpy(cel.ligne4,"###########");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        else if(egalA(T.orientation,"r")==1)
+        {
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"###########");
+            strcpy(cel.ligne3,"&&&&&&&&&&&");
+            strcpy(cel.ligne4,"###########");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        else if(egalA(T.orientation,"u")==1)
+        {
+            strcpy(cel.ligne1,"| #&&&&&&#|");
+            strcpy(cel.ligne2,"| #&&&&&&#|");
+            strcpy(cel.ligne3,"| #&&&&&&#|");
+            strcpy(cel.ligne4,"| #&&&&&&#|");
+            strcpy(cel.ligne5,"| #&&&&&&#|");
+        }
+        else if(egalA(T.orientation,"d")==1)
+        {
+            strcpy(cel.ligne1,"| #&&&&&&#|");
+            strcpy(cel.ligne2,"| #&&&&&&#|");
+            strcpy(cel.ligne3,"| #&&&&&&#|");
+            strcpy(cel.ligne4,"| #&&&&&&#|");
+            strcpy(cel.ligne5,"| #&&&&&&#|");
+        }
+
+    }
+    else if(egalA(T.etat,"t")==1)
+    {
+        if(egalA(T.orientation,"l")==1)
+        {
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"##~#~##~##~");
+            strcpy(cel.ligne3,"~&&~&&~&&&~");
+            strcpy(cel.ligne4,"##~#~##~##~");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        else if(egalA(T.orientation,"r")==1)
+        {
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"##~#~##~##~");
+            strcpy(cel.ligne3,"~&&~&&~&&&~");
+            strcpy(cel.ligne4,"##~#~##~##~");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        else if(egalA(T.orientation,"u")==1)
+        {
+            strcpy(cel.ligne1,"| #~&&~&&~|");
+            strcpy(cel.ligne2,"| #~&&~&&~|");
+            strcpy(cel.ligne3,"| ~&&&~&&#|");
+            strcpy(cel.ligne4,"| #&~&&~&#|");
+            strcpy(cel.ligne5,"| #&~&&~&#|");
+        }
+        else if(egalA(T.orientation,"d")==1)
+        {
+            strcpy(cel.ligne1,"| #~&&~&&~|");
+            strcpy(cel.ligne2,"| #~&&~&&~|");
+            strcpy(cel.ligne3,"| ~&&&~&&#|");
+            strcpy(cel.ligne4,"| #&~&&~&#|");
+            strcpy(cel.ligne5,"| #&~&&~&#|");
+        }
+    }
+    else if(egalA(T.etat,"c")==1)
+    {
+        if(egalA(T.orientation,"l")==1)
+        {
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"~#~#~#~#~#~");
+            strcpy(cel.ligne3,"~&~&~&~&~&~");
+            strcpy(cel.ligne4,"~#~#~#~#~#~");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        else if(egalA(T.orientation,"r")==1)
+        {
+            strcpy(cel.ligne1,"|---------|");
+            strcpy(cel.ligne2,"~#~#~#~#~#~");
+            strcpy(cel.ligne3,"~&~&~&~&~&~");
+            strcpy(cel.ligne4,"~#~#~#~#~#~");
+            strcpy(cel.ligne5,"|---------|");
+        }
+        else if(egalA(T.orientation,"u")==1)
+        {
+            strcpy(cel.ligne1,"| #~&~&~&~|");
+            strcpy(cel.ligne2,"| #~&~&~&~|");
+            strcpy(cel.ligne3,"| ~&~&~&~#|");
+            strcpy(cel.ligne4,"| ~&~&~&~&|");
+        }
+    }
+
+
+    else if(egalA(T.position,"5")==1)
+    {
+        if(egalA(T.etat,"n")==1)
+        {
+
+            if(egalA(T.orientation,"l")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"########  |");
+                strcpy(cel.ligne3,"####&&&#  |");
+                strcpy(cel.ligne4,"    ###   |");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"r")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"|  ########");
+                strcpy(cel.ligne3,"|  ###&&&#");
+                strcpy(cel.ligne4,"|   ###   ");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"u")==1)
+            {
+                strcpy(cel.ligne1,"| #&&&&#  |");
+                strcpy(cel.ligne2,"| #&&&&#  |");
+                strcpy(cel.ligne3,"| #&&&&&# |");
+                strcpy(cel.ligne4,"|   ###   |");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"d")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"|   ###   |");
+                strcpy(cel.ligne3,"| #&&&&&# |");
+                strcpy(cel.ligne4,"| #&&&&#  |");
+                strcpy(cel.ligne5,"| #&&&&#  |");
+            }
+
+        }
+        else if(egalA(T.etat,"t")==1)
+        {
+            if(egalA(T.orientation,"l")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"##~##~##  |");
+                strcpy(cel.ligne3,"~##~&&~#  |");
+                strcpy(cel.ligne4,"    #~#   |");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"r")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"|  ##~##~##");
+                strcpy(cel.ligne3,"|  #~&&~##~");
+                strcpy(cel.ligne4,"|   #~#    ");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"u")==1)
+            {
+                strcpy(cel.ligne1,"| #&&~&#  |");
+                strcpy(cel.ligne2,"| #&~&&~  |");
+                strcpy(cel.ligne3,"| #~&&~&# |");
+                strcpy(cel.ligne4,"|   #~#   |");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"d")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"|   #~#   |");
+                strcpy(cel.ligne3,"| #&~&&~# |");
+                strcpy(cel.ligne4,"| #~&&~#  |");
+                strcpy(cel.ligne5,"|-#&~&&~  |");
+            }
+        }
+        else if(egalA(T.etat,"c")==1)
+        {
+            if(egalA(T.orientation,"l")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"~#~#~#~#  |");
+                strcpy(cel.ligne3,"#~#~&~&~  |");
+                strcpy(cel.ligne4,"    ~#~   |");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"r")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"|  #~#~#~#~");
+                strcpy(cel.ligne3,"|  #~&~#~#~");
+                strcpy(cel.ligne4,"|   ~#~    ");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"u")==1)
+            {
+                strcpy(cel.ligne1,"|-~&~&~#  |");
+                strcpy(cel.ligne2,"| #~&~&~  |");
+                strcpy(cel.ligne3,"| #~&~&~# |");
+                strcpy(cel.ligne4,"|   ~#~   |");
+                strcpy(cel.ligne5,"|---------|");
+            }
+            else if(egalA(T.orientation,"d")==1)
+            {
+                strcpy(cel.ligne1,"|---------|");
+                strcpy(cel.ligne2,"|   ~#~   |");
+                strcpy(cel.ligne3,"| ~&~&~&~ |");
+                strcpy(cel.ligne4,"| ~&~&~#  |");
+                strcpy(cel.ligne5,"|-#~&~&~  |");
+            }
+        }
+    }
 
 
     //cellules croiseur
@@ -2291,7 +2274,8 @@ cellule creeCellule(EtatCase T)
         }
 
     }
-    else{
+    else
+    {
         strcpy(cel.ligne1,"|---------|");
         strcpy(cel.ligne2,"|         |");
         strcpy(cel.ligne3,"|         |");
