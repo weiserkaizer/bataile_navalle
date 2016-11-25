@@ -8,6 +8,14 @@
 
 
 
+//Affichage de l'aide du jeu
+void afficheAide(){
+    system("CLS");
+    printf("Bienvenue l'aide de jeu \n\n");
+    printf("La bataille navale est un jeu au tour par tour dans le quel chaque joueur possede 5 navire\n");
+}
+
+
 
 //compare deux chaine de caratere
 
