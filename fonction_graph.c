@@ -195,7 +195,7 @@ cellule creeCellule(EtatCase T)
 
     cellule cel;
 
-    if(egalA(T.cel,"bateau")==1)
+    if(egalA(T.cel,"ba")==1)
     {
         if(egalA(T.etat,"n")==1)
         {
