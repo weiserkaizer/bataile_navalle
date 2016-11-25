@@ -15,8 +15,12 @@
 int main()
 {
     //runIntro();
+<<<<<<< HEAD
 
 
+=======
+	system("color 1F");
+>>>>>>> Dev_Nicolas
 	srand(time(NULL)); //Initialisation de la seed avec le temps machine pour la génération de nombre pseudo-aléatoire
 	afficheAide();
     system("CLS");
@@ -24,11 +28,12 @@ int main()
 	Navire * typeNavire = initTypeNavire();
 	EtatCase **joueur = initialisationJoueur();
 	EtatCase **ordinateur = initialisationJoueur();
+	EtatCase **ordinateurAffichage = initialisationJoueur();
 
 	int  ligne,colonne, verifieSaisie;
 
     intro();
-	afficher(joueur, ordinateur);
+	afficher(joueur, ordinateurAffichage);
 
 	int i;
 
@@ -67,12 +72,12 @@ int main()
 		}while(verifieCoordonnee(typeNavire[i].taille, orientation, ligne, colonne, joueur) == 0);
 		placerNavire(typeNavire, i, orientation, ligne, colonne, joueur,'J');
 		//system("CLS");
-		afficher(joueur, ordinateur);
+		afficher(joueur, ordinateurAffichage);
 	}
 
 	placementNavireOrdinateur(ordinateur, typeNavire);
 
-	afficher(joueur, ordinateur);
+	afficher(joueur, ordinateurAffichage);
 
 	while(1)
 	{
@@ -81,12 +86,9 @@ int main()
 			verifieSaisie = saisieCoord(&ligne, &colonne);
 		}while(verifieSaisie == 0);
 
-		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
-		tirer(ordinateur, 'O', ligne, colonne);
-		//for(i = 4; i >= 0; i--) printf("%s %d L1 : %d L2 : %d C1 :%d C2 : %d\n", navireOrdinateur[i].acronyme, navireOrdinateur[i].survivabilite,navireOrdinateur[i].ligneExtrem1,navireOrdinateur[i].ligneExtrem2,navireOrdinateur[i].colonneExtrem1 ,navireOrdinateur[i].colonneExtrem2);
-		//system("pause");
+		tirer(ordinateur, ordinateurAffichage, 'O', ligne, colonne);
 		tireAutomatique(joueur);
-		afficher(joueur, ordinateur);
+		afficher(joueur, ordinateurAffichage);
 	}
 
 	system("pause");

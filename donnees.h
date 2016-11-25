@@ -53,16 +53,16 @@ struct EtatNavire
 
 };
 
-EtatNavire navireJoueur[5], navireOrdinateur[5];
+EtatNavire navireJoueur[5], navireOrdinateur[6];
 
 
-/*typedef struct ListeAffiche ListeAffiche
-struct ListeAffiche
+typedef struct ListeAffichage ListeAffichage;
+struct ListeAffichage
 {
     char *phrase;
-    ListeAffiche *suivant;
+    ListeAffichage *suivant;
 
-};*/
+};
 
 
 #endif /* DONNEES_H_ */
