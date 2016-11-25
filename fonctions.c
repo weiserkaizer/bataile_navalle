@@ -12,18 +12,6 @@
 //#include "donnees.h"
 #include "fonction_graph.h"
 
-ListeAffichage *AffichageAction(char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage * tete)
-{
-	ListeAffichage *nouveau = malloc(sizeof(ListeAffichage));
-	if(tete == NULL)
-	{
-		tete = malloc(sizeof(ListeAffichage));
-
-	}
-
-	return "";
-}
-
 
 Navire * initTypeNavire()
 {
@@ -34,7 +22,6 @@ Navire * initTypeNavire()
     strcpy((typeNavire[2]).nom, "Contre-Torpilleur"); strcpy((typeNavire[2]).acronyme, "CT"); (typeNavire[2]).taille = 3;
     strcpy((typeNavire[3]).nom, "Croiseur");strcpy((typeNavire[3]).acronyme, "CR"); (typeNavire[3]).taille = 4;
     strcpy((typeNavire[4]).nom, "Porte-Avion"); strcpy((typeNavire[4]).acronyme, "PA"); (typeNavire[4]).taille = 5;
-    strcpy(navireOrdinateur[5].acronyme, "ba");
 
     int i;
     for(i = 0; i<5; i++)
@@ -392,7 +379,7 @@ int verificationTire(EtatCase **plateau, int ligne, int colonne)
 	return -1;
 }
 
-void coulerNavire(EtatCase **plateauAAfficher, EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int colonneExtrem1, int colonneExtrem2)
+void coulerNavire(EtatCase **plateau, int ligneExtrem1, int ligneExtrem2, int colonneExtrem1, int colonneExtrem2)
 {
 	int ecartLigne = ligneExtrem2 - ligneExtrem1;
 	int ecartColonne = colonneExtrem2 - colonneExtrem1;
@@ -403,9 +390,7 @@ void coulerNavire(EtatCase **plateauAAfficher, EtatCase **plateau, int ligneExtr
 		{
 			while(colonneExtrem1 >= colonneExtrem2)
 			{
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem1].etat,"c");
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem1].cel,plateau[ligneExtrem1][colonneExtrem1].cel);
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem1].position,plateau[ligneExtrem1][colonneExtrem1].position);
+				strcpy(plateau[ligneExtrem1][colonneExtrem1].etat,"c");
 				colonneExtrem1--;
 			}
 		}
@@ -413,9 +398,7 @@ void coulerNavire(EtatCase **plateauAAfficher, EtatCase **plateau, int ligneExtr
 		{
 			while(colonneExtrem2 >= colonneExtrem1)
 			{
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem2].etat,"c");
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem2].cel,plateau[ligneExtrem1][colonneExtrem2].cel);
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem2].position,plateau[ligneExtrem1][colonneExtrem2].position);
+				strcpy(plateau[ligneExtrem1][colonneExtrem2].etat,"c");
 				colonneExtrem2--;
 			}
 		}
@@ -426,9 +409,7 @@ void coulerNavire(EtatCase **plateauAAfficher, EtatCase **plateau, int ligneExtr
 		{
 			while(ligneExtrem1 >= ligneExtrem2)
 			{
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem1].etat,"c");
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem1].cel,plateau[ligneExtrem1][colonneExtrem1].cel);
-				strcpy(plateauAAfficher[ligneExtrem1][colonneExtrem1].position,plateau[ligneExtrem1][colonneExtrem1].position);
+				strcpy(plateau[ligneExtrem1][colonneExtrem1].etat,"c");
 				ligneExtrem1--;
 			}
 		}
@@ -436,9 +417,7 @@ void coulerNavire(EtatCase **plateauAAfficher, EtatCase **plateau, int ligneExtr
 		{
 			while(ligneExtrem2 >= ligneExtrem1)
 			{
-				strcpy(plateauAAfficher[ligneExtrem2][colonneExtrem1].etat,"c");
-				strcpy(plateauAAfficher[ligneExtrem2][colonneExtrem1].cel,plateau[ligneExtrem2][colonneExtrem1].cel);
-				strcpy(plateauAAfficher[ligneExtrem2][colonneExtrem1].position,plateau[ligneExtrem2][colonneExtrem1].position);
+				strcpy(plateau[ligneExtrem2][colonneExtrem1].etat,"c");
 				ligneExtrem2--;
 			}
 		}
@@ -446,10 +425,10 @@ void coulerNavire(EtatCase **plateauAAfficher, EtatCase **plateau, int ligneExtr
 
 }
 
-int toucherNavire(EtatCase ** plateauAAfficher, EtatCase **plateau, char player, int ligne, int colonne)
+void toucherNavire(EtatCase ** plateau,char player, int ligne, int colonne)
 {
 	int i = 0;
-	char *navire = plateauAAfficher[ligne][colonne].cel;
+	char *navire = plateau[ligne][colonne].cel;
 	EtatNavire *etatNavirePlayer;
 
 	if(player == 'J')
@@ -468,67 +447,32 @@ int toucherNavire(EtatCase ** plateauAAfficher, EtatCase **plateau, char player,
 
 	if(etatNavirePlayer[i].survivabilite == 1)
 	{
-		coulerNavire(plateauAAfficher, plateau,etatNavirePlayer[i].ligneExtrem1, etatNavirePlayer[i].ligneExtrem2, etatNavirePlayer[i].colonneExtrem1, etatNavirePlayer[i].colonneExtrem2);
-
+		coulerNavire(plateau,etatNavirePlayer[i].ligneExtrem1, etatNavirePlayer[i].ligneExtrem2, etatNavirePlayer[i].colonneExtrem1, etatNavirePlayer[i].colonneExtrem2);
 		etatNavirePlayer[i].survivabilite -= 1;
 	}
 	else
 	{
-		strcpy(plateauAAfficher[ligne][colonne].etat,"t");
-
+		strcpy(plateau[ligne][colonne].etat,"t");
 		etatNavirePlayer[i].survivabilite -= 1;
 	}
-
-	return i;
 }
 
-void tirer(EtatCase ** plateau, EtatCase **plateauAffichage, char player,int ligne,int colonne)
+void tirer(EtatCase ** plateau, char player,int ligne,int colonne)
 {
-	int verifieTire, numeroNavire;
+	int verifieTire;
 
 	verifieTire = verificationTire(plateau, ligne, colonne);
 
-	if(player == 'J')
+	switch(verifieTire)
 	{
-		switch(verifieTire)
-		{
-		case 0: strcpy(plateau[ligne][colonne].etat, "t");
-				break;
-		case 1:	numeroNavire = toucherNavire(plateau, plateau,player, ligne, colonne);
-		//case 2: tirer(plateau, player);
+	case 0: strcpy(plateau[ligne][colonne].etat, "t");
 			break;
-			//case -1: tirer(plateau, player);
-			//		break;
-		default :break;
-		}
-	}
-	else
-	{
-		switch(verifieTire)
-				{
-				case 0: strcpy(plateau[ligne][colonne].etat, "t");
-						strcpy(plateauAffichage[ligne][colonne].etat, "t");
-						break;
-				case 1:	numeroNavire = toucherNavire(plateau, plateau,player, ligne, colonne);
-
-						strcpy(plateauAffichage[ligne][colonne].cel, "ba");
-						strcpy(plateauAffichage[ligne][colonne].orientation, plateau[ligne][colonne].orientation);
-
-						navireOrdinateur[5].survivabilite = navireOrdinateur[numeroNavire].survivabilite + 1;
-
-						navireOrdinateur[5].ligneExtrem1 = navireOrdinateur[numeroNavire].ligneExtrem1;
-						navireOrdinateur[5].ligneExtrem2 = navireOrdinateur[numeroNavire].ligneExtrem2;
-						navireOrdinateur[5].colonneExtrem1 = navireOrdinateur[numeroNavire].colonneExtrem1;
-						navireOrdinateur[5].colonneExtrem2 = navireOrdinateur[numeroNavire].colonneExtrem2;
-
-						toucherNavire(plateauAffichage, plateau, player, ligne, colonne);
-				//case 2: tirer(plateau, player);
-					break;
-					//case -1: tirer(plateau, player);
-					//		break;
-				default :break;
-				}
-
+	case 1:	toucherNavire(plateau, player, ligne, colonne);
+	//case 2: tirer(plateau, player);
+			break;
+	//case -1: tirer(plateau, player);
+	//		break;
+	default :break;
 	}
 
 }
@@ -539,9 +483,8 @@ void tireAutomatique(EtatCase ** plateau)
 
 	positionAleatoire(&ligne, &colonne);
 
-	tirer(plateau, plateau, 'J', colonne, ligne);
+	tirer(plateau, 'J', colonne, ligne);
 }
-
 
 
 void runIntro()
