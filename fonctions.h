@@ -29,8 +29,10 @@ int toucherNavire(EtatCase ** plateauAAfficher, EtatCase **plateau,char player, 
 void tirer(EtatCase ** plateau,EtatCase **plateauAffichage, char player, int ligne, int colonne);
 void tireAutomatique(EtatCase ** plateau);
 
+int tourJoueur(int *ligne, int *colonne);
+
 void runIntro();
-void jeu();
+int jeu();
 void reprise();
 void replay();
 

@@ -9,15 +9,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include "fonctions.h"
 //#include "donnees.h"
 #include "fonction_graph.h"
+#include "temps.h"
 
 ListeAffichage *AffichageAction(char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage * tete)
 {
 	ListeAffichage *nouveau = malloc(sizeof(ListeAffichage));
 	if(tete == NULL)
 	{
-		tete = malloc(sizeof(ListeAffichage));
+		tete = nouveau;
+
 
 	}
 
@@ -542,7 +545,111 @@ void tireAutomatique(EtatCase ** plateau)
 	tirer(plateau, plateau, 'J', colonne, ligne);
 }
 
+int tourJoueur(int *ligne, int *colonne)
+{
+	int verifieSaisie, tempsInit, tempsFinal;
 
+	tempsInit = chrono();
+
+	do
+	{
+		verifieSaisie = saisieCoord(ligne, colonne);
+	}while(verifieSaisie == 0);
+
+	tempsFinal = chrono();
+
+	if(diffTemps(tempsInit, tempsFinal) > 5)
+	{
+		return 0;
+	}
+
+	return 1;
+}
+
+int jeu()
+{
+		Navire * typeNavire = initTypeNavire();
+		EtatCase **joueur = initialisationJoueur();
+		EtatCase **ordinateur = initialisationJoueur();
+		EtatCase **ordinateurAffichage = initialisationJoueur();
+
+		int  ligne,colonne;
+
+		afficher(joueur, ordinateurAffichage);
+
+		int i;
+
+		//for(i = 4; i >= 0; i--) printf("%s %d\n", navireJoueur[i].acronyme, navireJoueur[i].survivabilite);
+
+		for(i = 4; i >= 0; i--)
+		{
+
+			int bonneCoord, bonneOrientation;
+			char orientation[3];
+
+			do
+			{
+			    printf("\nVeulliez placer le %s (%d cases) : ", typeNavire[i].nom, typeNavire[i].taille);
+
+				do
+				{
+					bonneCoord = saisieCoord(&ligne, &colonne);
+
+					if(bonneCoord == -1)
+					{
+						return 0;
+					}
+				}while(bonneCoord == 0);
+
+				do
+				{
+					bonneOrientation = saisieOrient(orientation);
+
+					if(bonneOrientation == -1)
+					{
+						return 0;
+					}
+				}while(bonneOrientation == 0);
+
+			}while(verifieCoordonnee(typeNavire[i].taille, orientation, ligne, colonne, joueur) == 0);
+			placerNavire(typeNavire, i, orientation, ligne, colonne, joueur,'J');
+			//system("CLS");
+			afficher(joueur, ordinateurAffichage);
+		}
+
+		placementNavireOrdinateur(ordinateur, typeNavire);
+
+		while(1)
+		{
+			if(tourJoueur(&ligne, &colonne))
+			{
+				tirer(ordinateur, ordinateurAffichage, 'O', ligne, colonne);
+			}
+			else
+			{
+				printf("Desole, vous avez depasse le temps autorise, votre tour n'a pas ete pris en compte !\n");
+				system("pause");
+			}
+			tireAutomatique(joueur);
+
+			afficher(joueur, ordinateurAffichage);
+		}
+
+		afficher(joueur, ordinateurAffichage);
+
+
+
+}
+
+void reprise()
+{
+
+}
+
+void replay()
+{
+
+}
 
 void runIntro()
 {
@@ -566,23 +673,6 @@ void runIntro()
     }
 
 }
-
-void jeu()
-{
-
-}
-
-void reprise()
-{
-
-}
-
-void replay()
-{
-
-}
-
-
 
 
 
