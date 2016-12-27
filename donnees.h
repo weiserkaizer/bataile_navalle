@@ -59,7 +59,7 @@ EtatNavire navireJoueur[5], navireOrdinateur[6];
 typedef struct ListeAffichage ListeAffichage;
 struct ListeAffichage
 {
-    char *phrase;
+    char phrase[200];
     ListeAffichage *suivant;
 
 };

@@ -14,17 +14,65 @@
 #include "fonction_graph.h"
 #include "temps.h"
 
-ListeAffichage *AffichageAction(char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage * tete)
+void action(char player, char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage *evenement)
+{
+	char actionText[200];
+	char posiColonne[2]; posiColonne[0]='A'+(char)colonne; posiColonne[1] = '\0';
+	char posiLigne[2];
+	itoa(ligne+1, posiLigne, 10);
+
+	if(player == 'O')
+	{
+		strcpy(actionText,"Vous avez ");
+	}
+	else
+	{
+		strcpy(actionText,"L'ordinateur a ");
+	}
+	if(strcmp(etatNavire, "t") == 0)
+	{
+		strcat(actionText, "touche ");
+	}
+	else if(strcmp(etatNavire,"c") == 0)
+	{
+		strcat(actionText, "coule ");
+	}
+	strcat(actionText, "un ");
+	strcat(actionText, typeNavire);
+	strcat(actionText, " en ");
+	strcat(actionText, posiColonne);
+	strcat(actionText, posiLigne);
+	strcpy(evenement->phrase, actionText);
+	//printf("%s", actionText);
+	//system("pause");
+
+}
+
+ListeAffichage *AffichageAction(char player,char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage * tete)
 {
 	ListeAffichage *nouveau = malloc(sizeof(ListeAffichage));
+	ListeAffichage *temp = tete;
+	nouveau->suivant = NULL;
+
 	if(tete == NULL)
 	{
 		tete = nouveau;
-
+		action(player, etatNavire, ligne, colonne, typeNavire, nouveau);
 
 	}
 
-	return "";
+	else
+	{
+		while(temp->suivant != NULL)
+		{
+			temp = temp->suivant;
+		}
+		temp->suivant = nouveau;
+		action(player, etatNavire, ligne, colonne, typeNavire, nouveau);
+	}
+
+
+	return tete;
 }
 
 
@@ -536,13 +584,14 @@ void tirer(EtatCase ** plateau, EtatCase **plateauAffichage, char player,int lig
 
 }
 
-void tireAutomatique(EtatCase ** plateau)
+void tireAutomatique(EtatCase ** plateau, ListeAffichage *tete)
 {
 	int ligne, colonne;
 
 	positionAleatoire(&ligne, &colonne);
 
-	tirer(plateau, plateau, 'J', colonne, ligne);
+	tirer(plateau, plateau, 'J', ligne, colonne);
+	AffichageAction('J', plateau[ligne][colonne].etat, ligne, colonne, plateau[ligne][colonne].cel, tete);
 }
 
 int tourJoueur(int *ligne, int *colonne)
@@ -558,7 +607,7 @@ int tourJoueur(int *ligne, int *colonne)
 
 	tempsFinal = chrono();
 
-	if(diffTemps(tempsInit, tempsFinal) > 5)
+	if(diffTemps(tempsInit, tempsFinal) > 90)
 	{
 		return 0;
 	}
@@ -573,7 +622,9 @@ int jeu()
 		EtatCase **ordinateur = initialisationJoueur();
 		EtatCase **ordinateurAffichage = initialisationJoueur();
 
-		int  ligne,colonne;
+		ListeAffichage * listeAction = NULL;
+
+		int  ligne,colonne,tempsOK, initListeAction = 1;
 
 		afficher(joueur, ordinateurAffichage);
 
@@ -619,9 +670,12 @@ int jeu()
 
 		placementNavireOrdinateur(ordinateur, typeNavire);
 
+		ListeAffichage * tempo;
+
 		while(1)
 		{
-			if(tourJoueur(&ligne, &colonne))
+			tempsOK = tourJoueur(&ligne, &colonne);
+			if(tempsOK)
 			{
 				tirer(ordinateur, ordinateurAffichage, 'O', ligne, colonne);
 			}
@@ -630,9 +684,36 @@ int jeu()
 				printf("Desole, vous avez depasse le temps autorise, votre tour n'a pas ete pris en compte !\n");
 				system("pause");
 			}
-			tireAutomatique(joueur);
 
+			if(tempsOK)
+			{
+				listeAction = AffichageAction('O', ordinateurAffichage[ligne][colonne].etat, ligne, colonne, ordinateurAffichage[ligne][colonne].cel, listeAction);
+				//action('O', joueur[ligne][colonne].etat, ligne, colonne, joueur[ligne][colonne].cel);
+			}
+			else
+			{
+
+			}
+			tireAutomatique(joueur, listeAction);
 			afficher(joueur, ordinateurAffichage);
+			//action('J', "t", ligne, colonne, ordinateurAffichage[ligne][colonne].cel);
+			if(initListeAction)
+			{
+				tempo = listeAction;
+				initListeAction = 0;
+				printf("%s\n", tempo->phrase);
+				tempo = tempo->suivant;
+				printf("%s\n", tempo->phrase);
+			}
+			//if(tempo == NULL) printf("Salut");
+			else
+			{
+				tempo = tempo->suivant;
+				printf("%s\n", tempo->phrase);
+				tempo = tempo->suivant;
+				printf("%s\n", tempo->phrase);
+			}
+			system("pause");
 		}
 
 		afficher(joueur, ordinateurAffichage);

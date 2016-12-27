@@ -11,7 +11,8 @@
 //#include "donnees.h"
 #include "fonction_graph.h"
 
-ListeAffichage *AffichageAction(char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage * liste);
+void action(char player, char etatNavire[], int ligne, int colonne, char typeNavire[] , ListeAffichage *evenement);
+ListeAffichage *AffichageAction(char player, char etatNavire[], int ligne, int colonne, char typeNavire[], ListeAffichage * liste);
 
 Navire * initTypeNavire();
 EtatCase ** initialisationJoueur();
